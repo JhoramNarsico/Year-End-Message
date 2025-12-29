@@ -127,8 +127,9 @@ function openLightbox(imgSrc, caption) {
 }
 
 // Event Delegation for better performance
+// UPDATED: Added selectors for April (.finish-line-stack img) and May (.river-flow-gallery img) layouts
 document.addEventListener('click', (e) => {
-    const target = e.target.closest('.polaroid-stack img, .fan-card img, .trail-photo img, .floating-frame img');
+    const target = e.target.closest('.polaroid-stack img, .fan-card img, .trail-photo img, .floating-frame img, .finish-line-stack img, .river-flow-gallery img');
     if (target) {
         e.stopPropagation();
         const caption = target.getAttribute('data-caption') || target.alt || "A beautiful memory";
@@ -418,8 +419,9 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    resizeConfetti();
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.scale(dpr, dpr);
 }, {passive: true});
 
 const launchBtn = document.getElementById('launch-btn');
@@ -481,6 +483,7 @@ if (window.matchMedia("(min-width: 900px)").matches) {
 }
 
 // --- SMOOTH ATMOSPHERE FADES (HP & TRAIL) ---
+// UPDATED: Removed negative rootMargin to fix "early fade out" issue
 const hpSection = document.querySelector('.hp-section');
 const hpAtmosphere = document.getElementById('hp-atmosphere');
 const trailSection = document.querySelector('.trail-section');
@@ -491,6 +494,7 @@ const atmosphereObserver = new IntersectionObserver((entries) => {
         const isHP = entry.target.classList.contains('hp-section');
         const overlay = isHP ? hpAtmosphere : trailAtmosphere;
         
+        // As long as ANY part of the section is visible, keep the atmosphere
         if (entry.isIntersecting) {
             overlay.classList.add('visible');
             document.documentElement.style.setProperty('--bg-color', isHP ? '#0c0c14' : '#f0f5e5');
@@ -500,8 +504,8 @@ const atmosphereObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { 
-    threshold: 0, 
-    rootMargin: "0px 0px -10% 0px" // Slight offset to trigger earlier/later smoothly
+    threshold: 0, // Trigger immediately when 1px enters screen
+    rootMargin: "0px" // Keep active until fully off-screen
 });
 
 if (hpSection) atmosphereObserver.observe(hpSection);
