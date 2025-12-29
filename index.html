@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Our Golden Journey - The 2025 Chronicles">
+    <title>2025: Our Golden Journey</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;600;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+        <div class="curtain-panel left">
+            <div class="curtain-texture"></div>
+        </div>
+        <div class="curtain-panel right">
+            <div class="curtain-texture"></div>
+        </div>
+        <div class="intro-text-container">
+            <div class="intro-year">2025</div>
+            <div class="counter-wrapper">
+                <span id="day-counter">0</span>
+                <span class="label">Days With You</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATMOSPHERE OVERLAYS -->
+    <div id="trail-atmosphere"></div>
+    <div id="hp-atmosphere"></div>
+
+    <!-- 3D BACKGROUND -->
+    <div id="canvas-container"></div>
+    
+    <!-- TEXTURE LAYERS -->
+    <div class="texture-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" aria-hidden="true">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <div class="photo-frame">
+                <img id="lightbox-img" src="" alt="Memory">
+                <div id="lightbox-caption"></div>
+            </div>
+            <div class="close-btn" aria-label="Close">×</div>
+        </div>
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <main>
+        <!-- HERO -->
+        <header class="hero">
+            <div class="hero-content">
+                <span class="sub-headline">The 2025 Chronicles</span>
+                <h1>Our Golden Year</h1>
+                <p>A collection of moments, big and small.</p>
+                <div class="divider"></div>
+                <div class="scroll-indicator">Begin the Journey ↓</div>
+            </div>
+        </header>
+
+        <!-- TIMELINE -->
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <div class="timeline-progress" id="timeline-progress"></div>
+        </div>
+
+        <!-- FEBRUARY -->
+        <section class="story-section" data-theme-bg="rgba(255, 240, 245, 0.3)" data-theme-accent="#d65db1">
+            <div class="deco-layer" style="color: rgba(214, 93, 177, 0.05);">
+                <svg class="floating-icon i1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.47z"/></svg>
+            </div>
+            <div class="content-wrapper">
+                <div class="text-side glass-card parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">02 — February</span>
+                        <h2 class="script-font">She's a Teacher!</h2>
+                        <div class="location-tag"><span style="margin-right: 5px; color: #d65db1;">📍</span> Cagayan de Oro City</div>
+                        <p>Just as the sun began to rise on the year, it rose on your dreams, too. The pinning ceremony wasn't just a formality; it was the first light of a new chapter.<br><br><span class="highlight-quote">"I am endlessly proud of you."</span></p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/feb1.jpg" class="p1" data-caption="The Pinning Ceremony" loading="lazy">
+                        <img src="assets/img/feb2.jpg" class="p2" data-caption="That beautiful smile" loading="lazy">
+                        <img src="assets/img/feb3.jpg" class="p3" data-caption="Family is everything" loading="lazy">
+                    </div>
+                    <div class="click-hint">Click to expand ✨</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MARCH: THE TRAIL RUN SPECTACLE (REDESIGNED STRUCTURE) -->
+        <section class="story-section trail-section reverse" data-theme-accent="#556b2f">
+            
+            <!-- Nature Animations -->
+            <div class="bird-container">
+                <svg class="bird b1" viewBox="0 0 50 30"><path d="M0,15 Q25,0 50,15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                <svg class="bird b2" viewBox="0 0 50 30"><path d="M0,15 Q25,0 50,15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <div class="leaf-container">
+                <div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div>
+            </div>
+            <div class="mountain-mist"></div>
+
+            <div class="content-wrapper">
+                
+                <!-- Text: The Field Notebook -->
+                <div class="text-side field-journal-card parallax-element" data-speed="0.03">
+                    <div class="notebook-binding"></div>
+                    <div class="compass-stamp">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="50" cy="50" r="40" stroke-dasharray="4 4"/>
+                            <path d="M50 20 L55 50 L50 80 L45 50 Z" fill="currentColor"/>
+                            <text x="45" y="15" font-size="12" font-family="serif" fill="currentColor">N</text>
+                        </svg>
+                    </div>
+
+                    <div class="journal-entry">
+                        <span class="month-label handwritten-date">March 03, 2025</span>
+                        <h2 class="handwritten-title">Claveria Expedition</h2>
+                        <div class="location-tag handwritten-loc">📍 Elev. 1200m • Misamis Oriental</div>
+                        
+                        <p class="handwritten-body">
+                            Our first real trail run. I remember the mud on our shoes and the sound of our heavy breathing. It wasn't easy, but reaching the top and seeing that view with you made every step worth it.
+                        </p>
+                        
+                        <!-- Elevation Graph Decoration -->
+                        <div class="elevation-graph">
+                            <span class="elevation-label">Elevation Profile</span>
+                            <svg viewBox="0 0 200 50" class="graph-line">
+                                <path d="M0,50 L20,40 L40,45 L60,20 L80,25 L100,5 L120,15 L140,10 L160,30 L180,40 L200,50" fill="none" stroke="#556b2f" stroke-width="2"/>
+                                <path d="M0,50 L20,40 L40,45 L60,20 L80,25 L100,5 L120,15 L140,10 L160,30 L180,40 L200,50 L200,50 L0,50 Z" fill="rgba(85, 107, 47, 0.2)" stroke="none"/>
+                            </svg>
+                        </div>
+
+                        <div class="highlight-quote handwritten-quote">"This is where our adventure began."</div>
+                    </div>
+                </div>
+
+                <!-- Images: Pinned Photos -->
+                <div class="image-side trail-gallery parallax-element" data-speed="-0.03">
+                    <div class="trail-photo t1">
+                        <div class="paper-clip"></div>
+                        <img src="assets/img/mar1.jpg" data-caption="Muddy shoes, happy hearts" loading="lazy">
+                    </div>
+                    <div class="trail-photo t2">
+                        <div class="tape-corner"></div>
+                        <img src="assets/img/mar2.jpg" data-caption="The summit view" loading="lazy">
+                    </div>
+                    <div class="trail-photo t3">
+                        <div class="paper-clip"></div>
+                        <img src="assets/img/mar3.jpg" data-caption="Conquering heights together" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APRIL -->
+        <section class="story-section" data-theme-bg="#f0f8ff" data-theme-accent="#4682b4">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">04 — April</span>
+                        <h2>Running for Earth</h2>
+                        <div class="location-tag">🏃‍♂️ City Streets</div>
+                        <p>Waking up before the sun is never fun, until I see you. The energy of the crowd on Earth Day was electric. We ran for the planet, but honestly? I was just happy to be running beside you holding your hand at the finish line.</p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/apr1.jpg" class="p1" data-caption="Race Bibs #001 & #002" loading="lazy">
+                        <img src="assets/img/apr2.jpg" class="p2" data-caption="Running side by side" loading="lazy">
+                        <img src="assets/img/apr3.jpg" class="p3" data-caption="Finish line smiles" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAY -->
+        <section class="story-section reverse" data-theme-bg="#eafaf1" data-theme-accent="#2e8b57">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">05 — May</span>
+                        <h2>City & Nature</h2>
+                        <div class="location-tag">🌊 Mindamora Falls & SM Uptown</div>
+                        <p>From the HOKA event to the majestic Mindamora Falls. We proved we can conquer concrete jungles and wild rivers alike. You look beautiful in a dress, but you look unstoppable in hiking gear.</p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/may1.jpg" class="p1" data-caption="Chasing waterfalls" loading="lazy">
+                        <img src="assets/img/may2.jpg" class="p2" data-caption="Hoka Event" loading="lazy">
+                        <img src="assets/img/may3.jpg" class="p3" data-caption="River trekking" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JUNE -->
+        <section class="story-section" data-theme-bg="#faf5e6" data-theme-accent="#cd853f">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">06 — June</span>
+                        <h2>Cowboy's Trail</h2>
+                        <div class="location-tag">🤠 Impasug-ong, Bukidnon</div>
+                        <p>Impasug-ong was rugged and raw. The Freedom Run tested our limits. There were moments I wanted to stop, but seeing you push forward gave me the strength to keep going.<br><span class="highlight-quote">"Side by side, stride for stride."</span></p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/jun1.jpg" class="p1" data-caption="Yeehaw!" loading="lazy">
+                        <img src="assets/img/jun2.jpg" class="p2" data-caption="Rugged landscape" loading="lazy">
+                        <img src="assets/img/jun3.jpg" class="p3" data-caption="Post-run glow" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JULY: THE WIZARDING WORLD -->
+        <section class="story-section hp-section" data-theme-accent="#ffd700">
+            <div class="candle-container">
+                <div class="candle c1"><div class="flame"></div></div>
+                <div class="candle c2"><div class="flame"></div></div>
+                <div class="candle c3"><div class="flame"></div></div>
+                <div class="candle c4"><div class="flame"></div></div>
+                <div class="candle c5"><div class="flame"></div></div>
+            </div>
+            <div class="snitch-container">
+                <img src="assets/img/snitch.gif" alt="Golden Snitch" class="snitch-gif">
+            </div>
+            <div class="content-wrapper">
+                <div class="text-side parchment-card parallax-element" data-speed="0.02">
+                    <div class="hogwarts-letter-content">
+                        <div class="letter-header">
+                            <img src="assets/img/hogwarts-crest.png" class="hp-crest-center" alt="Hogwarts Crest">
+                            <h3 class="school-name">HOGWARTS SCHOOL<br>of WITCHCRAFT and WIZARDRY</h3>
+                        </div>
+                        <div class="letter-body">
+                            <p class="salutation">My Dearest,</p>
+                            <p>Your face when you opened the Harry Potter set was priceless. It wasn't just a gift; it was a portkey to a world we both love.</p>
+                            <p>You always say you're waiting for your Hogwarts letter, but looking at you, I realize you bring enough magic into my life every single day without it.</p>
+                            <p class="quote-paragraph">"Mischief Managed."</p>
+                        </div>
+                        <div class="letter-footer">
+                            <p>Yours Sincerely,</p>
+                            <div class="signature-script">Minerva McGonagall</div>
+                            <div class="signature-sub">(But actually, me)</div>
+                        </div>
+                    </div>
+                    <div class="ink-splatter"></div>
+                </div>
+                <div class="image-side hp-gallery parallax-element" data-speed="-0.02">
+                    <div class="floating-frame f1"><img src="assets/img/jul1.jpg" data-caption="Accio Happiness!" loading="lazy"><div class="frame-border"></div></div>
+                    <div class="floating-frame f2"><img src="assets/img/jul2.jpg" data-caption="The Boy Who Lived... to love you" loading="lazy"><div class="frame-border"></div></div>
+                    <div class="floating-frame f3"><img src="assets/img/jul3.jpg" data-caption="Reading by wand light" loading="lazy"><div class="frame-border"></div></div>
+                    <div class="magic-sparkles"><span>✨</span><span>✨</span><span>✨</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUGUST -->
+        <section class="story-section" data-theme-bg="#fff8e1" data-theme-accent="#ff8c00">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">08 — August</span>
+                        <h2>My Birthday</h2>
+                        <div class="location-tag">🎂 Celebration</div>
+                        <p>Another year older. Usually, I dread getting older, but with you, I feel like I'm just getting started. Thank you for the cake, the party, and for making me feel like the most special person in the world.</p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/aug1.jpg" class="p1" data-caption="Make a wish" loading="lazy">
+                        <img src="assets/img/aug2.jpg" class="p2" data-caption="The Party" loading="lazy">
+                        <img src="assets/img/aug3.jpg" class="p3" data-caption="Just us" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEPTEMBER -->
+        <section class="story-section reverse" data-theme-bg="#fbf7f5" data-theme-accent="#8b4513">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">09 — September</span>
+                        <h2>Dinner Dates</h2>
+                        <div class="location-tag">🍽️ CDO Food Spots</div>
+                        <p>Exploring the city's best food spots. The food was great, sure. But the conversation? The way you laugh at my bad jokes? That's what really fed my soul.<br><span class="highlight-quote">"Good food, better company."</span></p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/sep1.jpg" class="p1" data-caption="Delicious eats" loading="lazy">
+                        <img src="assets/img/sep2.jpg" class="p2" data-caption="Date night vibes" loading="lazy">
+                        <img src="assets/img/sep3.jpg" class="p3" data-caption="My favorite view" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OCTOBER -->
+        <section class="story-section" data-theme-bg="#f0faff" data-theme-accent="#0056b3">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">10 — October</span>
+                        <h2>My Cheerleader</h2>
+                        <div class="location-tag">📣 Competition Floor</div>
+                        <p>The competition floor is scary. It's loud and chaotic. But looking up and seeing you cheering the loudest gave me a quiet confidence. You are my biggest fan, and I am yours.</p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/oct1.jpg" class="p1" data-caption="Cheering loud!" loading="lazy">
+                        <img src="assets/img/oct2.jpg" class="p2" data-caption="Victory hug" loading="lazy">
+                        <img src="assets/img/oct3.jpg" class="p3" data-caption="Team spirit" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <!-- NOVEMBER: THE GRAND SPECTACLE -->
+        <section class="story-section anniversary-section" data-theme-bg="#2a0a12" data-theme-accent="#ffd700">
+            <div class="anniversary-aura"></div>
+            <div class="gold-dust-container">
+                <div class="dust d1"></div><div class="dust d2"></div><div class="dust d3"></div>
+                <div class="dust d4"></div><div class="dust d5"></div>
+            </div>
+            
+            <div class="content-wrapper centered vertical-layout">
+                <div class="anniversary-header parallax-element" data-speed="0.02">
+                    <div class="crown-container">
+                        <svg class="crown-svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
+                        </svg>
+                    </div>
+                    <span class="anniversary-date">11 — NOVEMBER</span>
+                </div>
+
+                <div class="anniversary-title-wrapper parallax-element" data-speed="0.04">
+                    <h2 class="script-font shimmer-text main-title">One Year of Us</h2>
+                    <p class="anniversary-quote">"You are my home, my greatest adventure, and my heart."</p>
+                </div>
+
+                <div class="image-side large parallax-element" data-speed="-0.03">
+                    <div class="memory-fan">
+                        <div class="fan-card c1">
+                            <img src="assets/img/nov1.jpg" alt="Memory 1" data-caption="The beginning of forever" loading="lazy">
+                        </div>
+                        <div class="fan-card c2 center-card">
+                            <img src="assets/img/nov2.jpg" alt="Memory 2" data-caption="Happy 1st Anniversary, my love" loading="lazy">
+                        </div>
+                        <div class="fan-card c3">
+                            <img src="assets/img/nov3.jpg" alt="Memory 3" data-caption="To many more years" loading="lazy">
+                        </div>
+                        <div class="fan-glow"></div>
+                    </div>
+                    <div class="click-hint" style="color: #ffd700; margin-top: 20px;">Click to relive the moment ✨</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DECEMBER -->
+        <section class="story-section reverse" data-theme-bg="#fbf5f5" data-theme-accent="#b22222">
+            <div class="content-wrapper">
+                <div class="text-side parallax-element" data-speed="0.03">
+                    <div class="journal-entry">
+                        <span class="month-label">12 — December</span>
+                        <h2>Our Christmas</h2>
+                        <div class="location-tag">🎄 Holiday Season</div>
+                        <p>Warm lights, cool breeze, and your hand in mine. 2025 was perfect not because of what we did, but because we did it together. Here's to closing this chapter and starting the next one.</p>
+                    </div>
+                </div>
+                <div class="image-side parallax-element" data-speed="-0.03">
+                    <div class="polaroid-stack">
+                        <img src="assets/img/dec1.jpg" class="p1" data-caption="Christmas Tree" loading="lazy">
+                        <img src="assets/img/dec2.jpg" class="p2" data-caption="Gifts of love" loading="lazy">
+                        <img src="assets/img/dec3.jpg" class="p3" data-caption="Holiday magic" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAND FINALE -->
+        <section id="grand-finale" class="story-section" data-theme-bg="#0a0a2a" data-theme-accent="#ffd700">
+            <div class="finale-overlay"></div>
+            <div class="content-wrapper centered vertical">
+                <div class="finale-content">
+                    <div class="pre-launch-message">
+                        <span class="sub-headline" style="color: #ffd700;">The Next Chapter</span>
+                        <h2 class="finale-title">Ready for 2026?</h2>
+                        <p>The stars are aligned for us.</p>
+                        <button id="launch-btn" class="glow-button">
+                            <span class="btn-text">Ignite Our Future</span>
+                            <span class="btn-icon">✨</span>
+                        </button>
+                    </div>
+                    
+                    <div class="post-launch-message hidden">
+                        <h2 class="script-font" style="font-size: clamp(3rem, 6vw, 5rem); color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5);">Happy New Year.</h2>
+                        <div id="typewriter-text"></div>
+                        <div class="signature-large">Always, [Your Name]</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="script.js"></script>
+    
+    <!-- LIGHTBOX FIX -->
+    <script>
+        window.addEventListener('load', () => {
+             const frames = document.querySelectorAll('.floating-frame, .trail-photo, .fan-card');
+             const lightbox = document.getElementById('lightbox');
+             const lightboxImg = document.getElementById('lightbox-img');
+             const lightboxCaption = document.getElementById('lightbox-caption');
+
+             frames.forEach(frame => {
+                frame.addEventListener('click', (e) => {
+                    const img = frame.querySelector('img');
+                    if(img) {
+                        e.stopPropagation();
+                        lightboxImg.src = img.src;
+                        lightboxCaption.innerText = img.getAttribute('data-caption') || "Our Memory";
+                        lightbox.classList.add('active');
+                    }
+                });
+             });
+        });
+    </script>
+</body>
+</html>
