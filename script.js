@@ -126,10 +126,11 @@ function openLightbox(imgSrc, caption) {
     fireConfetti();
 }
 
-// Event Delegation for better performance
-// UPDATED: Added selectors for April (.finish-line-stack img) and May (.river-flow-gallery img) layouts
+// Updated Event Delegation to include Christmas layout (.x-photo-wrapper img)
 document.addEventListener('click', (e) => {
-    const target = e.target.closest('.polaroid-stack img, .fan-card img, .trail-photo img, .floating-frame img, .finish-line-stack img, .river-flow-gallery img');
+    // Selector list now includes: .x-photo-wrapper img
+    const target = e.target.closest('.polaroid-stack img, .fan-card img, .trail-photo img, .floating-frame img, .finish-line-stack img, .river-flow-gallery img, .photo-wrapper img, .b-photo-wrapper img, .d-photo-wrapper img, .c-photo-wrapper img, .x-photo-wrapper img');
+    
     if (target) {
         e.stopPropagation();
         const caption = target.getAttribute('data-caption') || target.alt || "A beautiful memory";

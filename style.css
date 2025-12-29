@@ -1069,3 +1069,898 @@ body {
 }
 .s1 { width: 40px; height: 25px; bottom: 50px; right: 50px; }
 .s2 { width: 20px; height: 15px; bottom: 80px; right: 80px; }
+
+/* --- JUNE: COWBOY TRAIL RUN THEME --- */
+
+.cowboy-section {
+    background: transparent; /* Maintain animation visibility */
+    position: relative;
+    overflow: visible;
+}
+
+/* --- THE WANTED POSTER CARD --- */
+.wanted-poster-card {
+    background: #fdf5e6 url('https://www.transparenttextures.com/patterns/aged-paper.png') !important;
+    border: 8px solid #8b4513 !important; /* Saddle Brown Border */
+    border-radius: 2px !important;
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.3),
+        inset 0 0 40px rgba(139, 69, 19, 0.2) !important;
+    position: relative;
+    padding: 50px 40px !important;
+    transform: rotate(1deg);
+    max-width: 460px;
+}
+
+/* Rope Border Effect (Inner Dashed Line) */
+.rope-border {
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 3px dashed #cd853f; /* Peru color */
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+/* Rusty Nail Graphic */
+.rusty-nail {
+    position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px;
+    background: radial-gradient(circle, #5a4a42 30%, #2c2420 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+/* Typography & Layout */
+.poster-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid #8b4513;
+    padding-bottom: 10px; margin-bottom: 20px;
+}
+
+.poster-label {
+    font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: 2px;
+    font-size: 0.8rem; color: #8b4513;
+}
+
+.wanted-poster-card .month-label { margin: 0; color: #a0522d; }
+
+.western-title {
+    font-family: 'Cinzel', serif !important;
+    font-weight: 700;
+    font-size: 3.2rem !important;
+    color: #5d4037 !important;
+    margin: 10px 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+}
+
+.wood-divider {
+    height: 4px; width: 100%;
+    background: repeating-linear-gradient(90deg, #8b4513, #8b4513 10px, #a0522d 10px, #a0522d 20px);
+    margin: 20px 0; border-radius: 2px; opacity: 0.7;
+}
+
+.western-quote {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: #8b4513 !important;
+    margin-top: 25px;
+    border-left: 4px solid #cd853f !important;
+    background: rgba(205, 133, 63, 0.1);
+    padding: 10px 15px !important;
+}
+
+.wanted-poster-card p {
+    color: #4e342e;
+    font-weight: 500;
+}
+
+/* --- PHOTO LAYOUT: SALOON WALL GALLERY --- */
+.saloon-wall-gallery {
+    position: relative; width: 450px; height: 480px;
+    perspective: 1000px;
+}
+
+.photo-wrapper {
+    position: absolute;
+    width: 230px; height: auto;
+    background: #fdfbf7;
+    padding: 12px 12px 40px 12px; /* Polaroid bottom padding */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transform-origin: center -20px; /* Swing from the nail */
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.photo-wrapper img {
+    width: 100%; height: auto; aspect-ratio: 3/4;
+    display: block;
+    filter: sepia(0.4) contrast(1.1); /* Rustic look */
+    transition: filter 0.4s ease;
+}
+
+/* Nail Head for Photos */
+.nail-head {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 12px;
+    background: #333; border-radius: 50%;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+    z-index: 20;
+}
+
+/* Positioning */
+.w1 { 
+    top: 20px; left: 20px; 
+    transform: rotate(-8deg); z-index: 2; 
+}
+.w2 { 
+    top: 60px; right: 20px; 
+    transform: rotate(6deg); z-index: 3; 
+}
+.w3 { 
+    top: 240px; left: 110px; 
+    transform: rotate(-3deg); z-index: 1; 
+}
+
+/* Hover Effects */
+.saloon-wall-gallery:hover .w1 { transform: rotate(-12deg) translateX(-30px); }
+.saloon-wall-gallery:hover .w2 { transform: rotate(10deg) translateX(30px); }
+.saloon-wall-gallery:hover .w3 { transform: rotate(0deg) translateY(10px); }
+
+/* Individual Focus */
+.photo-wrapper:hover {
+    z-index: 50;
+    transform: scale(1.1) rotate(0deg) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.photo-wrapper:hover img {
+    filter: sepia(0) contrast(1); /* Full color on hover */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .wanted-poster-card { margin: 0 20px; transform: rotate(0); }
+    .western-title { font-size: 2.5rem !important; }
+    
+    .saloon-wall-gallery { width: 320px; height: 400px; margin: 0 auto; }
+    .photo-wrapper { width: 160px; }
+    
+    .w1 { top: 0; left: 10px; }
+    .w2 { top: 80px; right: 10px; }
+    .w3 { top: 200px; left: 80px; }
+}
+/* --- AUGUST: BIRTHDAY CELEBRATION THEME --- */
+
+.birthday-section {
+    background: transparent; /* Maintains global animation visibility */
+    position: relative;
+    overflow: visible;
+}
+
+/* --- THE BIRTHDAY CARD CONTAINER --- */
+.birthday-card {
+    background: #fff !important;
+    border: 2px solid #ffe0b2;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 50px rgba(255, 140, 0, 0.15) !important;
+    position: relative;
+    padding: 50px 40px !important;
+    overflow: hidden;
+    /* Confetti Pattern Background */
+    background-image: radial-gradient(#ffcc80 15%, transparent 16%), radial-gradient(#ffcc80 15%, transparent 16%) !important;
+    background-size: 30px 30px !important;
+    background-position: 0 0, 15px 15px !important;
+}
+
+/* White overlay to make text readable over confetti */
+.birthday-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.94);
+    z-index: 0;
+}
+
+/* Vertical Ribbon */
+.card-ribbon {
+    position: absolute;
+    top: 0; left: 40px;
+    width: 40px; height: 100%;
+    background: linear-gradient(to bottom, #ff9800, #f57c00);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.card-bow {
+    position: absolute;
+    top: 35px; left: 25px; /* Centered on ribbon */
+    width: 70px; height: 50px;
+    z-index: 2;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+/* Text Content - Ensure z-index is above background */
+.birthday-card .journal-entry {
+    position: relative; z-index: 5;
+    padding-left: 60px; /* Space for ribbon */
+}
+
+.party-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem !important;
+    color: #ef6c00 !important;
+    text-shadow: 2px 2px 0px rgba(255, 224, 178, 0.8);
+    margin: 10px 0 !important;
+}
+
+.dotted-divider {
+    width: 100%; height: 2px;
+    background-image: linear-gradient(to right, #ff9800 33%, rgba(255,255,255,0) 0%);
+    background-position: bottom;
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+    margin: 25px 0;
+}
+
+.party-quote {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: #f57c00 !important;
+    border-left: 4px solid #ffcc80 !important;
+    background: #fff3e0;
+    border-radius: 0 8px 8px 0;
+    padding: 15px !important;
+}
+
+/* --- PHOTO LAYOUT: FLOATING BALLOONS --- */
+.balloon-gallery {
+    position: relative; width: 450px; height: 500px;
+}
+
+.b-photo-wrapper {
+    position: absolute;
+    width: 240px; height: auto;
+    background: #fff;
+    padding: 10px 10px 40px 10px; /* Polaroid Style */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    transform-origin: center top;
+    animation: balloonFloat 4s ease-in-out infinite alternate;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.b-photo-wrapper img {
+    width: 100%; height: auto; aspect-ratio: 3/4; display: block;
+    border: 1px solid #eee;
+}
+
+/* The String */
+.balloon-string {
+    position: absolute;
+    bottom: 100%; /* Go upwards */
+    left: 50%;
+    width: 2px; height: 150px;
+    background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+    transform-origin: bottom center;
+    pointer-events: none;
+}
+.balloon-string::after {
+    content: ''; position: absolute; bottom: 0; left: -3px;
+    width: 8px; height: 8px; background: #ff9800;
+    border-radius: 50%; /* Knot */
+}
+
+/* Individual Positioning & Delays */
+.b1 { 
+    top: 50px; left: 0px; 
+    transform: rotate(-5deg); z-index: 2;
+    animation-delay: 0s; 
+}
+.b2 { 
+    top: 150px; right: 0px; 
+    transform: rotate(5deg); z-index: 3;
+    animation-delay: 1.5s; 
+}
+.b3 { 
+    top: 300px; left: 60px; 
+    transform: rotate(-3deg); z-index: 1;
+    animation-delay: 0.7s; 
+}
+
+@keyframes balloonFloat {
+    0% { transform: translateY(0) rotate(-2deg); }
+    100% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* Hover Effects: Separation */
+.balloon-gallery:hover .b1 { left: -40px; transform: rotate(-10deg); }
+.balloon-gallery:hover .b2 { right: -40px; transform: rotate(10deg); }
+.balloon-gallery:hover .b3 { top: 320px; }
+
+/* Click/Focus Effect */
+.b-photo-wrapper:hover {
+    z-index: 50;
+    transform: scale(1.15) rotate(0deg) !important; /* Stop bobbing on hover */
+    animation-play-state: paused;
+    box-shadow: 0 25px 50px rgba(255, 140, 0, 0.3);
+    border: 2px solid #ff9800;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .birthday-card {
+        padding: 40px 25px !important;
+    }
+    .birthday-card .journal-entry {
+        padding-left: 0; /* Remove left padding on mobile */
+        text-align: center;
+    }
+    .card-ribbon {
+        width: 100%; height: 20px; /* Horizontal ribbon on mobile */
+        top: 0; left: 0;
+    }
+    .card-bow {
+        top: 10px; left: 50%; transform: translateX(-50%);
+    }
+    .party-title { margin-top: 30px !important; }
+
+    .balloon-gallery { width: 320px; height: 450px; margin: 0 auto; }
+    .b-photo-wrapper { width: 170px; }
+    
+    .b1 { top: 20px; left: 10px; }
+    .b2 { top: 120px; right: 10px; }
+    .b3 { top: 240px; left: 40px; }
+}
+/* --- SEPTEMBER: DINNER DATE NIGHTS THEME --- */
+
+.dinner-section {
+    background: transparent; /* Keep global animation visible */
+    position: relative;
+    overflow: visible;
+}
+
+/* --- THE MENU CARD CONTAINER --- */
+.menu-card {
+    background: #fffaf0 !important; /* Floral White / Linen color */
+    border: 1px solid #d3c6b8;
+    border-radius: 4px !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    position: relative;
+    padding: 60px 40px !important;
+    text-align: center;
+    max-width: 450px;
+}
+
+/* Inner Double Border */
+.menu-border {
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 3px double #800020; /* Burgundy */
+    pointer-events: none;
+}
+
+/* Header */
+.menu-header {
+    border-bottom: 1px solid #800020;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.restaurant-name {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.stars {
+    color: #c5a028; /* Gold */
+    font-size: 0.9rem;
+    margin-top: 5px;
+    letter-spacing: 5px;
+}
+
+/* Content */
+.menu-card .journal-entry {
+    border-left: none; padding-left: 0;
+}
+
+.menu-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem !important;
+    color: #800020 !important;
+    margin: 10px 0 !important;
+}
+
+.dish-separator {
+    margin: 20px 0;
+    color: #888;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    position: relative;
+}
+.dish-separator::before, .dish-separator::after {
+    content: '—';
+    margin: 0 10px;
+    color: #c5a028;
+}
+
+.menu-desc {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem !important;
+    color: #4a4a4a;
+    line-height: 1.8;
+}
+
+.date-quote {
+    margin-top: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: #800020 !important;
+    border-top: 1px solid rgba(128, 0, 32, 0.2);
+    border-bottom: 1px solid rgba(128, 0, 32, 0.2);
+    padding: 10px 0 !important;
+    border-left: none !important;
+    display: inline-block;
+    width: 100%;
+}
+
+.menu-footer {
+    margin-top: 30px;
+    font-size: 0.7rem; letter-spacing: 2px;
+    color: #888;
+}
+
+/* --- PHOTO LAYOUT: CANDLELIGHT TABLE --- */
+.dinner-table-gallery {
+    position: relative; width: 450px; height: 480px;
+}
+
+/* Decorative Napkin */
+.table-napkin {
+    position: absolute;
+    width: 300px; height: 300px;
+    background: #ffffff;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, #f0f0f0 20px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Candle Glow Animation */
+.candle-glow-bg {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(255, 165, 0, 0.3) 0%, transparent 70%);
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    animation: candleFlicker 3s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes candleFlicker {
+    0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+}
+
+.d-photo-wrapper {
+    position: absolute;
+    width: 220px; height: auto;
+    background: #fff;
+    padding: 8px 8px 30px 8px; /* Polaroid bottom */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.d-photo-wrapper img {
+    width: 100%; height: auto; aspect-ratio: 3/4;
+    display: block; filter: contrast(1.05) saturate(1.1); /* Rich colors for food */
+}
+
+/* Positioning - Casual Scatter */
+.d1 { 
+    top: 20px; left: 20px; 
+    transform: rotate(-12deg); z-index: 2; 
+}
+.d2 { 
+    top: 80px; right: 20px; 
+    transform: rotate(8deg); z-index: 3; 
+}
+.d3 { 
+    top: 220px; left: 100px; 
+    transform: rotate(-4deg); z-index: 4; 
+}
+
+/* Hover Effects: Lift up */
+.dinner-table-gallery:hover .d1 { transform: rotate(-15deg) translate(-20px, -10px) scale(1.02); }
+.dinner-table-gallery:hover .d2 { transform: rotate(10deg) translate(20px, -10px) scale(1.02); }
+.dinner-table-gallery:hover .d3 { transform: rotate(-2deg) translate(0px, 10px) scale(1.02); }
+
+/* Click/Focus Effect */
+.d-photo-wrapper:hover {
+    z-index: 50;
+    transform: scale(1.15) rotate(0deg) !important;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    border-color: #800020;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .menu-card { margin: 0 20px; }
+    .menu-title { font-size: 3rem !important; }
+    
+    .dinner-table-gallery { width: 320px; height: 400px; margin: 0 auto; }
+    .table-napkin { width: 200px; height: 200px; }
+    .d-photo-wrapper { width: 160px; }
+    
+    .d1 { top: 0; left: 10px; }
+    .d2 { top: 100px; right: 10px; }
+    .d3 { top: 200px; left: 80px; }
+}
+/* --- OCTOBER: CHEER DANCE THEME --- */
+
+.cheer-section {
+    background: transparent; /* Keep global animation */
+    position: relative;
+    overflow: visible;
+}
+
+/* --- THE VARSITY CARD CONTAINER --- */
+.varsity-card {
+    background: #ffffff !important;
+    border: 4px solid #0056b3; /* Varsity Blue */
+    border-radius: 8px !important;
+    box-shadow: 10px 10px 0px rgba(0, 86, 179, 0.2) !important; /* Block shadow */
+    position: relative;
+    padding: 0 !important; /* Reset padding for header layout */
+    overflow: hidden;
+    max-width: 450px;
+}
+
+/* Header with Mesh Texture */
+.varsity-header {
+    background: #0056b3;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Simulated Mesh Pattern */
+    background-image: radial-gradient(#004494 15%, transparent 16%);
+    background-size: 4px 4px;
+}
+
+.team-name {
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.score-badge {
+    background: #ffcc00; /* Athletic Gold */
+    color: #003366;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 2px solid #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Body Content */
+.varsity-card .journal-entry {
+    padding: 40px;
+    border-left: none; /* Remove default border */
+}
+
+.athletic-title {
+    font-family: 'Outfit', sans-serif !important; /* Varsity Block Style */
+    font-weight: 900 !important;
+    font-size: 3rem !important;
+    color: #003366 !important; /* Dark Blue */
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 10px !important;
+    text-shadow: 2px 2px 0px #e0e0e0;
+}
+
+.sport-divider {
+    height: 6px;
+    width: 60px;
+    background: repeating-linear-gradient(45deg, #0056b3, #0056b3 10px, #ffcc00 10px, #ffcc00 20px);
+    margin: 20px 0;
+}
+
+.megaphone-quote {
+    margin-top: 25px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #0056b3 !important;
+    text-align: center;
+    border: 2px dashed #0056b3;
+    border-radius: 50px;
+    padding: 10px 20px !important;
+    border-left: 2px dashed #0056b3 !important; /* Override default */
+}
+
+/* --- PHOTO LAYOUT: CHEER PYRAMID --- */
+.cheer-pyramid {
+    position: relative;
+    width: 450px; height: 500px;
+}
+
+.c-photo-wrapper {
+    position: absolute;
+    width: 220px; height: auto;
+    padding: 8px 8px 30px 8px;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.c-photo-wrapper img {
+    width: 100%; height: auto; aspect-ratio: 3/4;
+    display: block;
+}
+
+/* Pyramid Positioning */
+.flyer {
+    top: 0; left: 115px; /* Center top */
+    z-index: 10;
+    transform: rotate(2deg);
+}
+
+.base-left {
+    top: 200px; left: 0;
+    z-index: 5;
+    transform: rotate(-5deg);
+}
+
+.base-right {
+    top: 200px; right: 0;
+    z-index: 5;
+    transform: rotate(5deg);
+}
+
+/* Star Sticker on Flyer */
+.star-sticker {
+    position: absolute; top: -15px; right: -15px;
+    font-size: 2rem; color: #ffcc00;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+    transform: rotate(15deg);
+}
+
+/* Hover Animation: "The Toss" */
+.cheer-pyramid:hover .flyer {
+    transform: translateY(-40px) rotate(0deg) scale(1.1); /* Jumps up */
+    box-shadow: 0 30px 50px rgba(0, 86, 179, 0.3);
+}
+
+.cheer-pyramid:hover .base-left {
+    transform: translateX(-20px) rotate(-8deg); /* Moves out for stability */
+}
+
+.cheer-pyramid:hover .base-right {
+    transform: translateX(20px) rotate(8deg);
+}
+
+/* Click/Focus Effect */
+.c-photo-wrapper:hover {
+    z-index: 50 !important;
+    transform: scale(1.15) rotate(0deg) !important;
+    border: 3px solid #ffcc00; /* Gold Highlight */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .varsity-card { margin: 0 20px; }
+    .athletic-title { font-size: 2.5rem !important; }
+    
+    .cheer-pyramid { width: 320px; height: 450px; margin: 0 auto; }
+    .c-photo-wrapper { width: 150px; }
+    
+    /* Mobile Stack */
+    .flyer { left: 85px; top: 0; }
+    .base-left { left: 0; top: 180px; }
+    .base-right { right: 0; top: 180px; }
+}
+/* --- DECEMBER: CHRISTMAS SEASON THEME --- */
+
+.christmas-section {
+    background: transparent; /* Keep global animation visible */
+    position: relative;
+    overflow: visible;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* --- THE HOLIDAY CARD CONTAINER --- */
+.christmas-card {
+    background: #fffafa !important; /* Snow white */
+    border-radius: 8px !important;
+    box-shadow: 0 15px 40px rgba(178, 34, 34, 0.15) !important;
+    position: relative;
+    padding: 50px 40px !important;
+    overflow: hidden;
+    max-width: 460px;
+}
+
+/* Candy Cane Border */
+.candy-cane-border {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 8px;
+    background: repeating-linear-gradient(
+        45deg,
+        #b22222,
+        #b22222 10px,
+        #ffffff 10px,
+        #ffffff 20px,
+        #228b22 20px,
+        #228b22 30px,
+        #ffffff 30px,
+        #ffffff 40px
+    );
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Wax Seal */
+.wax-seal {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 50px; height: 50px;
+    background: radial-gradient(circle, #d32f2f, #b71c1c);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1.5rem;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    border: 2px solid #e57373;
+    font-family: serif;
+    transform: rotate(15deg);
+}
+
+/* Content Styling */
+.christmas-card .journal-entry {
+    border-left: none; padding-left: 0;
+}
+
+.holiday-header {
+    display: flex; align-items: baseline; gap: 10px;
+    margin-bottom: 15px;
+}
+
+.season-tag {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
+    background: #e8f5e9; color: #2e7d32;
+    padding: 4px 8px; border-radius: 4px;
+}
+
+.festive-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem !important;
+    color: #b22222 !important; /* Firebrick Red */
+    margin: 10px 0 !important;
+    text-shadow: 2px 2px 0px rgba(34, 139, 34, 0.1);
+}
+
+.holly-divider {
+    height: 2px; width: 80%;
+    background: linear-gradient(to right, transparent, #228b22, transparent);
+    margin: 25px auto;
+    position: relative;
+}
+.holly-divider::after {
+    content: '❄️';
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: #fffafa; padding: 0 5px; color: #b22222; font-size: 1.2rem;
+}
+
+.xmas-quote {
+    margin-top: 25px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: #228b22 !important; /* Forest Green */
+    text-align: center;
+    border-top: 1px dashed #b22222;
+    border-bottom: 1px dashed #b22222;
+    padding: 10px 0 !important;
+    border-left: none !important;
+    width: 100%; display: block;
+}
+
+/* --- PHOTO LAYOUT: CHRISTMAS TREE STACK --- */
+.christmas-tree-gallery {
+    position: relative; width: 450px; height: 500px;
+}
+
+.x-photo-wrapper {
+    position: absolute;
+    width: 220px; height: auto;
+    background: #fff;
+    padding: 8px 8px 30px 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+}
+
+.x-photo-wrapper img {
+    width: 100%; height: auto; aspect-ratio: 3/4; display: block;
+    border: 1px solid #eee;
+}
+
+/* Tree Structure */
+.x-top {
+    top: 40px; left: 115px; /* Center */
+    z-index: 10;
+    transform: rotate(0deg);
+    border-top: 4px solid #ffd700; /* Gold top border */
+}
+
+.x-left {
+    top: 220px; left: 10px;
+    z-index: 5;
+    transform: rotate(-8deg);
+    border-bottom: 4px solid #228b22; /* Green bottom border */
+}
+
+.x-right {
+    top: 220px; right: 10px;
+    z-index: 5;
+    transform: rotate(8deg);
+    border-bottom: 4px solid #b22222; /* Red bottom border */
+}
+
+/* Star Topper */
+.tree-star {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    font-size: 4rem; color: #ffd700;
+    z-index: 20;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+    animation: twinkle 2s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+}
+
+/* Hover Effects: Expand Tree */
+.christmas-tree-gallery:hover .x-top { transform: translateY(-20px) scale(1.05); }
+.christmas-tree-gallery:hover .x-left { transform: translateX(-30px) rotate(-12deg); }
+.christmas-tree-gallery:hover .x-right { transform: translateX(30px) rotate(12deg); }
+.christmas-tree-gallery:hover .tree-star { top: -30px; animation-duration: 0.5s; }
+
+/* Click Effect */
+.x-photo-wrapper:hover {
+    z-index: 50 !important;
+    transform: scale(1.2) rotate(0deg) !important;
+    box-shadow: 0 20px 50px rgba(178, 34, 34, 0.3);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .christmas-card { margin: 0 20px; }
+    .festive-title { font-size: 2.8rem !important; }
+    
+    .christmas-tree-gallery { width: 320px; height: 480px; margin: 0 auto; }
+    .x-photo-wrapper { width: 150px; }
+    
+    .x-top { left: 85px; top: 30px; }
+    .x-left { left: 0; top: 200px; }
+    .x-right { right: 0; top: 200px; }
+}
