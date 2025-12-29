@@ -8,15 +8,18 @@ window.addEventListener('load', () => {
 
     heroElements.style.opacity = '0';
     heroElements.style.transform = 'translateY(30px)';
-    heroElements.style.filter = 'blur(10px)'; 
-    heroElements.style.transition = 'opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s, filter 1.5s ease 0.5s';
+    
+    // Performance: Avoid excessive blur calculation during load
+    // heroElements.style.filter = 'blur(10px)'; 
+    
+    heroElements.style.transition = 'opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s';
 
     let currentDay = 0;
-    const targetDay = 365; // Keeping 365 for full year effect
+    const targetDay = 365;
     const easeOutQuad = (t) => t * (2 - t);
     
     let startTime = null;
-    const duration = 2500; 
+    const duration = 2000; // Speed up slightly for UX
 
     function updateCounter(timestamp) {
         if (!startTime) startTime = timestamp;
@@ -30,7 +33,7 @@ window.addEventListener('load', () => {
             requestAnimationFrame(updateCounter);
         } else {
             counterElement.innerText = targetDay;
-            setTimeout(() => { finishIntro(); }, 300);
+            setTimeout(() => { finishIntro(); }, 200);
         }
     }
     requestAnimationFrame(updateCounter);
@@ -41,11 +44,10 @@ window.addEventListener('load', () => {
             introOverlay.classList.add('open-curtains');
             heroElements.style.opacity = '1';
             heroElements.style.transform = 'translateY(0)';
-            heroElements.style.filter = 'blur(0)'; 
         }, 500);
         setTimeout(() => {
             introOverlay.classList.add('finished');
-            introOverlay.style.visibility = 'hidden'; 
+            introOverlay.style.display = 'none'; // Optimize: remove from render tree
         }, 2800); 
     }
 });
@@ -56,15 +58,21 @@ const timelineContainer = document.querySelector('.timeline-container');
 const parallaxElements = document.querySelectorAll('.parallax-element');
 
 let isScrolling = false;
-function onScroll() { isScrolling = true; }
+
+// Optimization: Throttle scroll event to just set a flag
+window.addEventListener('scroll', () => { isScrolling = true; }, { passive: true });
+
 function updateLoop() {
     if (isScrolling) {
         isScrolling = false;
         
+        const scrollY = window.scrollY;
+        const winHeight = window.innerHeight;
+
         if (timelineContainer && timelineProgress) {
             const containerTop = timelineContainer.offsetTop;
             const containerHeight = timelineContainer.offsetHeight;
-            const scrollPosition = window.scrollY + (window.innerHeight / 2);
+            const scrollPosition = scrollY + (winHeight / 2);
             let progress = (scrollPosition - containerTop) / containerHeight;
             progress = Math.max(0, Math.min(1, progress));
             timelineProgress.style.height = (progress * 100) + '%';
@@ -73,9 +81,10 @@ function updateLoop() {
         if (parallaxElements.length > 0) {
             parallaxElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                // Optimization: Only animate if in viewport
+                if (rect.top < winHeight && rect.bottom > 0) {
                     const speed = parseFloat(el.getAttribute('data-speed')) || 0.05;
-                    const distanceFromCenter = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+                    const distanceFromCenter = (winHeight / 2) - (rect.top + rect.height / 2);
                     el.style.transform = `translateY(${distanceFromCenter * speed}px)`;
                 }
             });
@@ -83,11 +92,11 @@ function updateLoop() {
     }
     requestAnimationFrame(updateLoop);
 }
-window.addEventListener('scroll', onScroll, { passive: true });
 requestAnimationFrame(updateLoop);
 
 
 // --- THEME OBSERVER ---
+// Optimization: Higher threshold to prevent rapid flickering
 const themeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if(entry.isIntersecting) {
@@ -98,7 +107,7 @@ const themeObserver = new IntersectionObserver((entries) => {
             }
         }
     });
-}, { threshold: 0.25 });
+}, { threshold: 0.2 });
 
 document.querySelectorAll('.story-section, .hero').forEach(section => {
     themeObserver.observe(section);
@@ -110,50 +119,50 @@ const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const closeBtn = document.querySelector('.close-btn');
 
-const clickableElements = document.querySelectorAll('.polaroid-stack img, .fan-card, .trail-photo');
+function openLightbox(imgSrc, caption) {
+    lightboxImg.src = imgSrc;
+    lightboxCaption.innerText = caption;
+    lightbox.classList.add('active');
+    fireConfetti();
+}
 
-clickableElements.forEach(el => {
-    el.addEventListener('click', (e) => {
+// Event Delegation for better performance
+document.addEventListener('click', (e) => {
+    const target = e.target.closest('.polaroid-stack img, .fan-card img, .trail-photo img, .floating-frame img');
+    if (target) {
         e.stopPropagation();
-        
-        let targetImg;
-        if(el.tagName === 'IMG') {
-            targetImg = el;
-        } else {
-            targetImg = el.querySelector('img');
-        }
-
-        if(targetImg) {
-            const src = targetImg.src;
-            const caption = targetImg.getAttribute('data-caption') || targetImg.alt || "A beautiful memory";
-            
-            lightboxImg.src = src;
-            lightboxCaption.innerText = caption;
-            lightbox.classList.add('active');
-            fireConfetti();
-        }
-    });
+        const caption = target.getAttribute('data-caption') || target.alt || "A beautiful memory";
+        openLightbox(target.src, caption);
+    }
 });
 
-closeBtn.addEventListener('click', () => { lightbox.classList.remove('active'); });
-lightbox.addEventListener('click', (e) => {
+if(closeBtn) closeBtn.addEventListener('click', () => { lightbox.classList.remove('active'); });
+if(lightbox) lightbox.addEventListener('click', (e) => {
     if(e.target === lightbox || e.target.classList.contains('lightbox-backdrop')) lightbox.classList.remove('active');
 });
 
 const canvas = document.getElementById('confetti-canvas');
 const ctx = canvas.getContext('2d');
 const dpr = window.devicePixelRatio || 1;
-canvas.width = window.innerWidth * dpr;
-canvas.height = window.innerHeight * dpr;
-ctx.scale(dpr, dpr);
-canvas.style.width = window.innerWidth + 'px';
-canvas.style.height = window.innerHeight + 'px';
+// Set canvas size once
+function resizeConfetti() {
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+}
+resizeConfetti();
+window.addEventListener('resize', resizeConfetti, {passive: true});
 
 let confettiParticles = [];
 function fireConfetti() {
     confettiParticles = [];
     const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-gold').trim();
-    for(let i=0; i<100; i++) { 
+    // Reduce particle count slightly for mobile performance
+    const count = window.innerWidth < 700 ? 50 : 100;
+    
+    for(let i=0; i<count; i++) { 
         confettiParticles.push({
             x: window.innerWidth / 2, y: window.innerHeight / 2,
             r: Math.random() * 6 + 3,
@@ -180,27 +189,16 @@ function animateConfetti() {
 // --- THREE.JS BACKGROUND ---
 const scene = new THREE.Scene();
 
-// UPDATE: Added Mountain Chapter (0.15) & HP Chapter (0.65)
 const STORY_CHAPTERS = [
-    // Dawn (Jan-Feb)
     { percent: 0.0, sky: new THREE.Color(0xffe4e1), sun: new THREE.Color(0xffd700), fog: new THREE.Color(0xffe4e1), tree: new THREE.Color(0xd8bfd8), fogDensity: 0.03, sunPos: { x: 0, y: -2, z: -20 } },
-    
-    // MOUNTAIN MORNING (March/Trail) - Clear & Crisp (Reduced Fog Density)
     { percent: 0.15, sky: new THREE.Color(0x4ca1af), sun: new THREE.Color(0xffeeb1), fog: new THREE.Color(0xc4e0e5), tree: new THREE.Color(0x4caf50), fogDensity: 0.008, sunPos: { x: 3, y: 5, z: -15 } },
-
-    // Day (Apr-May)
-    { percent: 0.3, sky: new THREE.Color(0x87CEEB), sun: new THREE.Color(0xffffff), fog: new THREE.Color(0xe0f7fa), tree: new THREE.Color(0x228b22), fogDensity: 0.015, sunPos: { x: 5, y: 10, z: -10 } },
     
-    // Sunset (June)
+    // UPDATED APRIL: Reduced fogDensity to 0.002 to remove the "foggy filter" look
+    { percent: 0.3, sky: new THREE.Color(0x87CEEB), sun: new THREE.Color(0xffffff), fog: new THREE.Color(0xe0f7fa), tree: new THREE.Color(0x228b22), fogDensity: 0.002, sunPos: { x: 5, y: 10, z: -10 } },
+    
     { percent: 0.55, sky: new THREE.Color(0xff7f50), sun: new THREE.Color(0xff4500), fog: new THREE.Color(0xffdab9), tree: new THREE.Color(0xcd853f), fogDensity: 0.025, sunPos: { x: -5, y: 2, z: -20 } },
-    
-    // MAGIC NIGHT (July/HP) - Deep Blue/Purple
     { percent: 0.65, sky: new THREE.Color(0x050510), sun: new THREE.Color(0xddeeff), fog: new THREE.Color(0x050510), tree: new THREE.Color(0x1a1a2e), fogDensity: 0.035, sunPos: { x: 0, y: 10, z: -20 } },
-
-    // Anniversary (Nov) - Gold
     { percent: 0.85, sky: new THREE.Color(0x2a0a12), sun: new THREE.Color(0xffd700), fog: new THREE.Color(0x4a1a00), tree: new THREE.Color(0xffd700), fogDensity: 0.02, sunPos: { x: 0, y: 5, z: -10 } },
-
-    // Finale (Dec) - Space
     { percent: 1.0, sky: new THREE.Color(0x050510), sun: new THREE.Color(0xffd700), fog: new THREE.Color(0x050510), tree: new THREE.Color(0x120a21), fogDensity: 0.004, sunPos: { x: 0, y: 8, z: -15 } }
 ];
 
@@ -228,6 +226,7 @@ scene.fog = new THREE.FogExp2(0xffffff, 0.02);
 const treeGroup = new THREE.Group();
 scene.add(treeGroup);
 
+// Optimization: Reuse Materials and Geometries
 const treeMat = new THREE.MeshLambertMaterial({ color: 0x228b22, flatShading: true });
 const trunkMat = new THREE.MeshLambertMaterial({ color: 0x8b4513, flatShading: true });
 const treeTopGeo = new THREE.ConeGeometry(0.8, 1.8, 5);
@@ -238,6 +237,7 @@ const trees = [];
 const treeCount = 70;
 const trailLength = 80;
 
+// Function to create tree reusing geometries
 function createTree(z) {
     const grp = new THREE.Group();
     const top = new THREE.Mesh(treeTopGeo, treeMat);
@@ -246,6 +246,12 @@ function createTree(z) {
     mid.position.y = 0.8;
     const trunk = new THREE.Mesh(trunkGeo, trunkMat);
     trunk.position.y = 0.4;
+    
+    // Disable frustum culling for individual parts for performance in group
+    top.frustumCulled = false;
+    mid.frustumCulled = false;
+    trunk.frustumCulled = false;
+
     grp.add(trunk, mid, top);
     
     const side = Math.random() > 0.5 ? 1 : -1;
@@ -264,7 +270,8 @@ for(let i=0; i<treeCount; i++) {
     treeGroup.add(t);
 }
 
-const particleCount = 300;
+// Particle System
+const particleCount = 200; // Reduced count for performance
 const partGeo = new THREE.BufferGeometry();
 const partPos = new Float32Array(particleCount * 3);
 for(let i=0; i<particleCount*3; i++) partPos[i] = (Math.random()-0.5) * 50;
@@ -298,7 +305,7 @@ function createFirework(x, y, z, color) {
     const geometry = new THREE.BufferGeometry();
     const positions = [];
     const velocities = [];
-    const count = 50;
+    const count = 40; // Reduced for performance
     for (let i = 0; i < count; i++) {
         positions.push(x, y, z);
         const theta = Math.random() * Math.PI * 2;
@@ -391,7 +398,7 @@ function animate() {
             const fw = fireworks[i];
             const positions = fw.geometry.attributes.position.array;
             const vels = fw.userData.velocities;
-            const count = 50;
+            const count = 40;
             for(let j=0; j < count; j++) {
                 positions[j*3] += vels[j*3]; positions[j*3+1] += vels[j*3+1]; positions[j*3+2] += vels[j*3+2]; vels[j*3+1] -= 0.015;
             }
@@ -411,9 +418,8 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    ctx.scale(dpr, dpr);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    resizeConfetti();
 }, {passive: true});
 
 const launchBtn = document.getElementById('launch-btn');
@@ -475,7 +481,6 @@ if (window.matchMedia("(min-width: 900px)").matches) {
 }
 
 // --- SMOOTH ATMOSPHERE FADES (HP & TRAIL) ---
-// UPDATED: Removed negative rootMargin to fix "early fade out" issue
 const hpSection = document.querySelector('.hp-section');
 const hpAtmosphere = document.getElementById('hp-atmosphere');
 const trailSection = document.querySelector('.trail-section');
@@ -486,7 +491,6 @@ const atmosphereObserver = new IntersectionObserver((entries) => {
         const isHP = entry.target.classList.contains('hp-section');
         const overlay = isHP ? hpAtmosphere : trailAtmosphere;
         
-        // As long as ANY part of the section is visible, keep the atmosphere
         if (entry.isIntersecting) {
             overlay.classList.add('visible');
             document.documentElement.style.setProperty('--bg-color', isHP ? '#0c0c14' : '#f0f5e5');
@@ -496,8 +500,8 @@ const atmosphereObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { 
-    threshold: 0, // Trigger immediately when 1px enters screen
-    rootMargin: "0px" // Keep active until fully off-screen
+    threshold: 0, 
+    rootMargin: "0px 0px -10% 0px" // Slight offset to trigger earlier/later smoothly
 });
 
 if (hpSection) atmosphereObserver.observe(hpSection);
